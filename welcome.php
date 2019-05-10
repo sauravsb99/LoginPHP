@@ -28,7 +28,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 }
 
 #myInput {
-  /* background-image: url('https://cdn1.iconfinder.com/data/icons/web-and-mobile-ui-outline-icon-kit/512/UI_Icons_2-01-512.png'); */
+  /*background-image: url('https://cdn1.iconfinder.com/data/icons/web-and-mobile-ui-outline-icon-kit/512/UI_Icons_2-01-512.png');*/ 
   background-position: 10px 10px;
   background-repeat: no-repeat;
   width: 100%;
@@ -76,55 +76,30 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 
 <table id="myTable">
   <tr class="header">
-    <th style="width:35%;">Name</th>
-    <th style="width:30%;">PhoneNo</th>
-    <th style="width:35%;">GPA</th>
+    <th style="width:35%;">USERNAME</th>
+    <th style="width:30%;">ID</th>
+    <th style="width:35%;">CREATED_AT</th>
+    
   </tr>
-  <tr>
-    <td>Saurav S B</td>
-    <td>7012723582</td>
-    <td>10.0</td>
-  </tr>
-  <tr>
-    <td>Akshara Lakshmi</td>
-    <td>9876543210</td>
-    <td>6.38</td>
-  </tr>
-  <tr>
-    <td>Ajay Duth</td>
-    <td>7894561238</td>
-    <td>8.89</td>
-  </tr>
-  <tr>
-    <td>Abdul Khader</td>
-    <td>8475961235</td>
-    <td>9.98</td>
-  </tr>
-  <tr>
-    <td>Abin Baby</td>
-    <td>9254167712</td>
-    <td>10.0</td>
-  </tr>
-  <tr>
-    <td>Maneesh</td>
-    <td>8758479110</td>
-    <td>7.83</td>
-  </tr>
-  <tr>
-    <td>Pranav</td>
-    <td>8989455432</td>
-    <td>8.72</td>
-  </tr>
-  <tr>
-    <td>Rishon Krishna</td>
-    <td>7878984565</td>
-    <td>8.50</td>
-  </tr>
-  <tr>
-    <td>Abhishek T</td>
-    <td>7986944565</td>
-    <td>F</td>
-  </tr>
+ <?php
+$conn = mysqli_connect("localhost", "root", "1339", "login");
+  // Check connection
+  if ($conn->connect_error) {
+   die("Connection failed: " . $conn->connect_error);
+  } 
+  $sql = "SELECT id, username, created_at FROM users";
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+   // output data of each row
+   while($row = $result->fetch_assoc()) {
+    echo "<tr><td>" . $row["username"]. "</td><td>" . $row["id"] . "</td><td>"
+. $row["created_at"]."</td>
+  </tr>";
+}
+echo "</table>";
+} else { echo "0 results"; }
+$conn->close();
+?>
 </table>     
          
     </div>
